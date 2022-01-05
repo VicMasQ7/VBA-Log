@@ -1,5 +1,6 @@
 Attribute VB_Name = "Logger"
-''
+Option Explicit
+
 ' VBA-Log v0.1.0
 ' (c) Tim Hall - https://github.com/VBA-tools/VBA-Log
 '
@@ -113,12 +114,13 @@ Public Sub Log(Level As Long, Message As String, Optional From As String = "")
     If Not VBA.IsEmpty(LogCallback) Then
         Select Case VBA.VarType(LogCallback)
         Case VBA.vbString
-            Application.Run CStr(LogCallback), Level, Message, From
+            'Application.Run CStr(LogCallback), Level, Message, From 'Call in VBA
+            Call CallByName(Form1, CStr(LogCallback), VbMethod, Level, Message, From) 'Call in VB6
         Case VBA.vbArray To VBA.vbArray + VBA.vbByte
-            Dim log_i As Long
-            For log_i = LBound(LogCallback) To UBound(LogCallback)
-                Application.Run CStr(LogCallback(log_i)), Level, Message, From
-            Next log_i
+'            Dim log_i As Long
+'            For log_i = LBound(LogCallback) To UBound(LogCallback)
+'                Application.Run CStr(LogCallback(log_i)), Level, Message, From
+'            Next log_i
         End Select
     Else
         '

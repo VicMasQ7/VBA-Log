@@ -4,3 +4,14 @@
 # Ignore scratch work and other files
 _scratch
 .DS_Store
+
+#VB6 files
+*.vbw
+*.csi
+*.exp
+*.lib
+*.lvw
+*.dca
+*.scc
+*.tmp
+*.exe
